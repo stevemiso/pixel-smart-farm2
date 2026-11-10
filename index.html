@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>픽셀 스마트팜 🌱</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <meta name="description" content="통합과학 원리(양지·음지, 온실 효과)를 활용한 픽셀 농사 게임">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- 게임 화면 -->
+    <div id="game-wrap">
+      <canvas id="game" width="960" height="640"></canvas>
+
+      <!-- 상단 HUD -->
+      <div id="hud-top">
+        <div id="money-panel" class="panel">
+          <span class="coin">🪙</span>
+          <span id="money">100</span><span class="unit">G</span>
+        </div>
+        <div id="menu-buttons">
+          <button id="btn-shop" class="menu-btn" title="상점 (E)">🛒 상점</button>
+          <button id="btn-bag" class="menu-btn" title="가방 (I)">🎒 가방</button>
+          <button id="btn-guide" class="menu-btn" title="작물 도감 (G)">📖 도감</button>
+          <button id="btn-mute" class="menu-btn" title="소리 켜기/끄기">🔊</button>
+        </div>
+      </div>
+
+      <!-- 하단 핫바 -->
+      <div id="hotbar-panel" class="panel">
+        <div id="hotbar"></div>
+      </div>
+
+      <!-- 토스트 메시지 -->
+      <div id="toasts"></div>
+
+      <!-- 플롯 정보 (마우스 올린 밭 칸) -->
+      <div id="plot-tip" class="panel hidden"></div>
+
+      <!-- FPS 디버그 -->
+      <div id="fps">FPS --</div>
+    </div>
+
+    <!-- 시작 화면 -->
+    <div id="start-screen">
+      <div class="start-box panel">
+        <h1>🌱 픽셀 스마트팜</h1>
+        <p class="start-sub">빛과 온도의 과학으로 최고의 농부가 되어보자!</p>
+        <ul class="start-help">
+          <li><b>이동</b> 방향키 / WASD</li>
+          <li><b>심기·수확</b> 밭 칸 클릭 또는 스페이스바</li>
+          <li><b>아이템 선택</b> 하단 핫바 클릭 또는 숫자키 1~9</li>
+          <li><b>상점·가방·도감</b> 상단 버튼 또는 E / I / G</li>
+        </ul>
+        <button id="btn-start" class="big-btn">게임 시작</button>
+      </div>
+    </div>
+
+    <!-- 모달: 상점 -->
+    <div id="modal-shop" class="modal hidden">
+      <div class="modal-box panel">
+        <div class="modal-head">
+          <h2>🛒 상점</h2>
+          <button class="close-btn" data-close="modal-shop">✕</button>
+        </div>
+        <div class="tab-row" id="shop-tabs">
+          <button class="tab active" data-tab="seeds">씨앗</button>
+          <button class="tab" data-tab="facilities">설비</button>
+        </div>
+        <div id="shop-body"></div>
+      </div>
+    </div>
+
+    <!-- 모달: 가방 -->
+    <div id="modal-bag" class="modal hidden">
+      <div class="modal-box panel">
+        <div class="modal-head">
+          <h2>🎒 가방</h2>
+          <button class="close-btn" data-close="modal-bag">✕</button>
+        </div>
+        <div id="bag-body"></div>
+      </div>
+    </div>
+
+    <!-- 모달: 작물 도감 (설명서) -->
+    <div id="modal-guide" class="modal hidden">
+      <div class="modal-box panel wide">
+        <div class="modal-head">
+          <h2>📖 작물 도감 · 환경 설명서</h2>
+          <button class="close-btn" data-close="modal-guide">✕</button>
+        </div>
+        <div id="guide-body"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
